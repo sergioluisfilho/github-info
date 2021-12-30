@@ -19,6 +19,8 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
+import SearchProfiles from '../screens/SearchProfiles';
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -40,9 +42,9 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
+      </Stack.Group> */}
     </Stack.Navigator>
   );
 }
@@ -58,11 +60,12 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="SearchProfile"
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
@@ -83,7 +86,18 @@ function BottomTabNavigator() {
             </Pressable>
           ),
         })}
+      /> */}
+
+      <BottomTab.Screen
+        name="SearchProfile"
+        component={SearchProfiles}
+        options={{
+          title: 'Search Profiles',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
       />
+
+
       <BottomTab.Screen
         name="TabTwo"
         component={TabTwoScreen}
